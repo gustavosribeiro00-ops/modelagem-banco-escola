@@ -1,0 +1,28 @@
+name: Commit Diario Automatico
+
+on:
+  schedule:
+    # Executa diariamente às 12:00 UTC (09:00 Horário de Brasília)
+    - cron: '0 12 * * *'
+  workflow_dispatch: # Permite rodar manualmente a qualquer momento
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Modificar arquivo de log
+        run: |
+          echo "Ultimo commit: $(date)" >> commit_history.txt
+
+      - name: Enviar commit
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add commit_history.txt
+          git commit -m "chore: atualizacao diaria automatica"
+          git push
