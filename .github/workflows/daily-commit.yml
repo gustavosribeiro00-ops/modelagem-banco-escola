@@ -21,8 +21,8 @@ jobs:
 
       - name: Enviar commit
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "gustavosribeiro00-ops"
+          git config --global user.email "gustavosribeiro00@gmail.com"
           git add commit_history.txt
           git commit -m "chore: atualizacao diaria automatica"
           git push
